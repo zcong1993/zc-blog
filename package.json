@@ -1,0 +1,25 @@
+{
+  "name": "zc-blog",
+  "version": "1.0.0",
+  "description": "A blog using express",
+  "author": "zcong1993 <1005997919@qq.com>",
+  "private": true,
+  "scripts": {
+    "dev": "supervisor  index.js"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "purecss": "^0.6.2"
+  },
+  "devDependencies": {
+    "body-parser": "^1.15.2",
+    "express-session": "^1.14.2",
+    "mongoose": "^4.7.5",
+    "pug": "^2.0.0-beta6",
+    "supervisor": "^0.12.0"
+  }
+}

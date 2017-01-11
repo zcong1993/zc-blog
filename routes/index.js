@@ -1,3 +1,6 @@
+const getPosts = require('../schemas/mock').getPosts
+
 exports.index = (req, res) => {
-  res.render('index')
+  const posts = getPosts(4)
+  res.render('index', {posts})
 }

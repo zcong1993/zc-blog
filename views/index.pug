@@ -1,1 +1,7 @@
 extends layout/layout.pug
+block content
+  .posts.new
+    h1.content-subhead Pinned Post
+    each post in posts
+      include layout/post.pug
+  .posts.recent

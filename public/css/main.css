@@ -8,3 +8,15 @@ html, button, input, select, textarea,
   font-weight: 100;
   letter-spacing: 0.01em;
 }
+
+a:not(.post-category):hover,
+a:not(.post-category):focus {
+  color: #00AA90;
+  background: transparent;
+  text-decoration: none
+}
+
+a.post-category:hover,
+a.post-category:focus {
+  text-decoration: underline;
+}

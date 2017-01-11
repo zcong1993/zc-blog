@@ -1,0 +1,15 @@
+mixin category-type(type, name)
+  a.post-category(href="#", class="post-category-" + type) #{name}
+
+section.post
+  header.post-header
+    img.post-avatar(width="48", height="48", alt="Tilo Mitra&#x27;s avatar", src="static/img/common/tilo-avatar.png")
+    h2.post-title #{post.title}
+    p.post-meta
+      | By <a href="#" class="post-author">#{post.author}</a> under
+      each category in post.categories
+        +category-type(category.type, category.name)
+  .post-description
+    p
+      | !{post.content}
+

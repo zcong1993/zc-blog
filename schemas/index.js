@@ -6,7 +6,8 @@ const ObjectId = Schema.ObjectId
 const categoriesSchema = new Schema({
   type: {
     type: String,
-    require: [true, 'category type is required!']
+    require: [true, 'category type is required!'],
+    enum: ['design', 'pure', 'yui', 'js']
   },
   name: {
     type: String,
@@ -15,11 +16,24 @@ const categoriesSchema = new Schema({
 })
 
 const postSchema = new Schema({
-  _id: ObjectId,
-  title: String,
-  author: String,
+  title: {
+    type: String,
+    unique: true,
+    require: [true, 'title is required!'],
+    validate: {
+      validator: (v) => v.length < 50,
+      message: '{VALUE} is too long!'
+    }
+  },
+  author: {
+    type: String,
+    require: [true, 'author is required!']
+  },
   categories: [categoriesSchema],
-  content: String
+  content: {
+    type: String,
+    require: [true, 'content is required!']
+  }
 })
 
-exports.Post = mongoose.model('Post'. postSchema)
+exports.postSchema = postSchema

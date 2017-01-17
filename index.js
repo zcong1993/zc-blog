@@ -21,5 +21,7 @@ app.set('view engine', 'pug')
 app.locals.appName = 'zc-blog'
 
 app.get('/', routes.index)
+app.get('/test', routes.insert)
+app.get('/show', routes.show)
 
 app.listen(3000, () => console.log('app runing at http://localhost:3000'))

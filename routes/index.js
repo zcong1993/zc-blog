@@ -2,13 +2,13 @@ const getPosts = require('../utils/mock').getPosts
 const schemas= require('../schemas/index')
 const mongoose = require('mongoose')
 
-const postSchema = schemas.postSchema
-const Post = mongoose.model('Post', postSchema)
+const Post = schemas.Post
+
 
 exports.index = (req, res) => {
   // const posts = getPosts(4)
   // res.render('index', {posts})
-  Post.find()
+  Post.test(req.params.id || 1)
     .then((posts) => {
       // console.log(posts)
       res.render('index', {posts})
@@ -24,7 +24,19 @@ exports.insert = (req, res) => {
     .catch((err) => res.send(err))
 }
 
-exports.show = (req, res) => {
-  Post.find()
-    .then((posts) => res.send(posts))
+exports.show = (req, res, next) => {
+  Post.test(2)
+    // .then((posts) => res.json(posts))
+    .then(() => next(new Error('test error')))
+  // post.test()
+  //   .then((data) => res.send(data))
+  //   .catch(err => res.send(err))
+  // Post.find()
+  //   .then((posts) => res.send(posts))
+}
+
+exports.errorHandler = (req, res, err) => {
+  if (err) {
+    res.send(err.message)
+  }
 }

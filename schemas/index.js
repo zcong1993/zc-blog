@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const config = require('../config')
 
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
@@ -18,7 +19,7 @@ const categoriesSchema = new Schema({
 const postSchema = new Schema({
   title: {
     type: String,
-    unique: true,
+    // unique: true,
     require: [true, 'title is required!'],
     validate: {
       validator: (v) => v.length < 50,
@@ -33,7 +34,15 @@ const postSchema = new Schema({
   content: {
     type: String,
     require: [true, 'content is required!']
+  },
+  updated: {
+    type: Date,
+    default: Date.now
   }
 })
 
-exports.postSchema = postSchema
+postSchema.statics.test = function (num) {
+  return Promise.resolve(this.find().limit(config.postsPerPage).sort({updated: -1}).skip(config.postsPerPage * (num - 1)))
+}
+
+exports.Post = mongoose.model('Post', postSchema)

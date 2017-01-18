@@ -20,7 +20,7 @@ app.use(session({
 app.set('view engine', 'pug')
 app.locals.appName = 'zc-blog'
 
-app.get('/', routes.index)
+app.get('/home/:id?', routes.index)
 app.get('/test', routes.insert)
 app.get('/show', routes.show)
 

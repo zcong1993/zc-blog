@@ -5,15 +5,23 @@ const mongoose = require('mongoose')
 const Post = schemas.Post
 
 
-exports.index = (req, res) => {
-  // const posts = getPosts(4)
-  // res.render('index', {posts})
+exports.index = (req, res, next) => {
   Post.test(req.params.id || 1)
     .then((posts) => {
-      // console.log(posts)
-      res.render('index', {posts})
+      if (posts.length) {
+        res.render('index', {posts})
+      } else {
+        next(new Error('no posts here!'))
+      }
+
     })
     .catch((err) => res.send(err))
+}
+
+exports.post = (req, res, next) => {
+  Post.findById(req.params.id || '')
+    .then((post) => res.json(post))
+    .catch(() => next(new Error('no post here')))
 }
 
 exports.insert = (req, res) => {
@@ -27,7 +35,7 @@ exports.insert = (req, res) => {
 exports.show = (req, res, next) => {
   Post.test(2)
     // .then((posts) => res.json(posts))
-    .then(() => next(new Error('test error')))
+    .then(() => next(new Error('test')))
   // post.test()
   //   .then((data) => res.send(data))
   //   .catch(err => res.send(err))
@@ -35,7 +43,7 @@ exports.show = (req, res, next) => {
   //   .then((posts) => res.send(posts))
 }
 
-exports.errorHandler = (req, res, err) => {
+exports.errorHandler = (err, req, res, next) => {
   if (err) {
     res.send(err.message)
   }

@@ -45,4 +45,8 @@ postSchema.statics.test = function (num) {
   return Promise.resolve(this.find().limit(config.postsPerPage).sort({updated: -1}).skip(config.postsPerPage * (num - 1)))
 }
 
+postSchema.statics.findById = function (id) {
+  return Promise.resolve(this.find({_id: id}))
+}
+
 exports.Post = mongoose.model('Post', postSchema)

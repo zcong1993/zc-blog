@@ -5,7 +5,7 @@ section.post
   header.post-header
     img.post-avatar(width="48", height="48", alt="Tilo Mitra&#x27;s avatar", src="/static/img/common/tilo-avatar.png")
     h2.post-title
-      a.beauty-link(href="#") #{post.title}
+      a.beauty-link(href="/post/" + post._id) #{post.title}
     p.post-meta
       | By <a href="#" class="post-author">#{post.author}</a> under
       each category in post.categories
@@ -14,5 +14,8 @@ section.post
       span at #{rawDate.getFullYear()}-#{rawDate.getMonth() + 1}-#{rawDate.getDate()}  #{rawDate.getHours()}:#{rawDate.getMinutes()}:#{rawDate.getSeconds()}
   .post-description
     p
-      | !{post.content}
+      if post.content.length > 255
+        | !{post.content.substr(0, 252)}...
+      else
+        | !{post.content}
 

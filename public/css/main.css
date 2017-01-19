@@ -7,10 +7,11 @@ html, button, input, select, textarea,
   font-family: sans-serif;
   font-weight: 100;
   letter-spacing: 0.01em;
+  line-height: 1.6;
 }
 
-a:not(.post-category):hover,
-a:not(.post-category):focus {
+a:not(.post-category):not(.origin):hover,
+a:not(.post-category):not(.origin):focus {
   color: #00AA90;
   background: transparent;
   text-decoration: none
@@ -19,4 +20,47 @@ a:not(.post-category):focus {
 a.post-category:hover,
 a.post-category:focus {
   text-decoration: underline;
+}
+
+.pull-right {
+  float: right;
+}
+
+.posts-list-data-part {
+  margin-left: 0.5em;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.center {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.container .sub-title {
+  color: #666;
+  font-weight: 100;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  font-size: 128%;
+}
+
+.container h1 {
+  font-weight: 100;
+  letter-spacing: 0.05em;
+}
+
+.post-content {
+  border: 1px solid red;
+  line-height: 1.8;
+  max-width: 48em;
+  font-weight: 200;
+}
+
+@media (min-width: 48em) {
+  .post-content {
+    min-height: 42em;
+  }
 }

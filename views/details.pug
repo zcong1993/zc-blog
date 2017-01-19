@@ -1,0 +1,8 @@
+extends layout/layout.pug
+block content
+  .container.text-center
+    - var post = posts[0]
+    h1  #{post.title}
+    h2.sub-title  author: #{post.author}
+    .post-content.center
+      | !{post.content}

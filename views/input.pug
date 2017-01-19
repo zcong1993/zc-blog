@@ -1,0 +1,6 @@
+extends layout/layout.pug
+block content
+  form.pure-form#post(method="POST" action="/insert")
+    textarea(name="post[content]" cols=80 rows=20)
+    button.pure-button(type="submit") Submit
+

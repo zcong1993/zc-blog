@@ -41,12 +41,20 @@ const postSchema = new Schema({
   }
 })
 
-postSchema.statics.test = function (num) {
+postSchema.statics.getPostsByPage = function (num) {
   return Promise.resolve(this.find().limit(config.postsPerPage).sort({updated: -1}).skip(config.postsPerPage * (num - 1)))
 }
 
 postSchema.statics.findById = function (id) {
   return Promise.resolve(this.find({_id: id}))
+}
+
+postSchema.statics.findByCategory = function (cate) {
+  return Promise.resolve(this.find({categories: {$elemMatch: {name: new RegExp(cate, 'i')}}}))
+}
+
+postSchema.statics.getCount = function () {
+  return Promise.resolve(this.count({}))
 }
 
 exports.Post = mongoose.model('Post', postSchema)

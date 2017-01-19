@@ -8,10 +8,11 @@ section.post
       a.beauty-link(href="/post/" + post._id) #{post.title}
     p.post-meta
       | By <a href="#" class="post-author">#{post.author}</a> under
-      each category in post.categories
-        +category-type(category.type, category.name)
-      - rawDate = post.updated
-      span at #{rawDate.getFullYear()}-#{rawDate.getMonth() + 1}-#{rawDate.getDate()}  #{rawDate.getHours()}:#{rawDate.getMinutes()}:#{rawDate.getSeconds()}
+      span.posts-list-data-part
+        each category in post.categories
+          +category-type(category.type, category.name)
+        - rawDate = post.updated
+        span.posts-list-data-part at #{rawDate.getFullYear()}-#{rawDate.getMonth() + 1}-#{rawDate.getDate()}  #{rawDate.getHours()}:#{rawDate.getMinutes()}:#{rawDate.getSeconds()}
   .post-description
     p
       if post.content.length > 255

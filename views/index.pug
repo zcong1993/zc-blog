@@ -1,7 +1,9 @@
 extends layout/layout.pug
 block content
   .posts.new
-    h1.content-subhead Pinned Post
+    h1.content-subhead Recent Post
     each post in posts
       include layout/post.pug
-  .posts.recent
+  .pagination
+    a.pure-button.pure-button-primary.origin(href=opts.pastUrl disabled=opts.isLast) Past
+    a.pure-button.pure-button-primary.pull-right.origin(href=opts.newUrl disabled=opts.isFirst) New

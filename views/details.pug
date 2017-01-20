@@ -1,8 +1,8 @@
 extends layout/layout.pug
 block content
-  .container.text-center
-    - var post = posts[0]
-    h1  #{post.title}
-    h2.sub-title  author: #{post.author}
+  .container
+    h1.text-center  #{post.title}
+    h2.sub-title.text-center  author: #{post.author}&nbsp;&nbsp;
+      span updated: #{post.time.date} #{post.time.time}
     .post-content.center
-      | !{post.content}
+      | !{post.markedContent}

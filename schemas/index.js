@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const config = require('../config')
+const {markedWithHighlight} = require('../utils')
 
 const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
@@ -56,5 +57,18 @@ postSchema.statics.findByCategory = function (cate) {
 postSchema.statics.getCount = function () {
   return Promise.resolve(this.count({}))
 }
+
+// postSchema.post('find', function (result, next) {
+//   next(Array.from(result, post => post.test = 1))
+// })
+postSchema.post('init', function (doc) {
+  doc.markedContent = markedWithHighlight(doc.content)
+  const date = doc.updated
+  doc.time = {
+    date: `${date.getFullYear()}-
+    ${date.getMonth() + 1}-${date.getDate()}`,
+    time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+  }
+})
 
 exports.Post = mongoose.model('Post', postSchema)

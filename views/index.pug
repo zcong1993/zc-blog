@@ -5,5 +5,9 @@ block content
     each post in posts
       include layout/post.pug
   .pagination
-    a.pure-button.pure-button-primary.origin(href=opts.pastUrl disabled=opts.isLast) Past
-    a.pure-button.pure-button-primary.pull-right.origin(href=opts.newUrl disabled=opts.isFirst) New
+    a.pure-button.pure-button-primary.origin(href=opts.pastUrl disabled=opts.isLast)
+      i.fa.fa-angle-left
+      |&nbsp;&nbsp;Past
+    a.pure-button.pure-button-primary.pull-right.origin(href=opts.newUrl disabled=opts.isFirst)
+      |New&nbsp;&nbsp;
+      i.fa.fa-angle-right

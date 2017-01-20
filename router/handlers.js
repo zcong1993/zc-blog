@@ -31,7 +31,10 @@ exports.index = (req, res, next) => {
 
 exports.post = (req, res, next) => {
   Post.findById(req.params.id)
-    .then((posts) => res.render('details', {posts}))
+    .then((posts) => {
+      const post = posts[0]
+      res.render('details', {post})
+    })
     .catch(() => next(new Error('no post here')))
 }
 

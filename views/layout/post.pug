@@ -3,7 +3,7 @@ mixin category-type(type, name)
 
 section.post
   header.post-header
-    img.post-avatar(width="48", height="48", alt="Tilo Mitra&#x27;s avatar", src="/static/img/common/tilo-avatar.png")
+    //- img.post-avatar(width="48", height="48", alt="Tilo Mitra&#x27;s avatar", src="/static/img/common/tilo-avatar.png")
     h2.post-title
       a.beauty-link(href="/post/" + post._id) #{post.title}
     p.post-meta
@@ -11,12 +11,10 @@ section.post
       span.posts-list-data-part
         each category in post.categories
           +category-type(category.type, category.name)
-        - rawDate = post.updated
-        span.posts-list-data-part at #{rawDate.getFullYear()}-#{rawDate.getMonth() + 1}-#{rawDate.getDate()}  #{rawDate.getHours()}:#{rawDate.getMinutes()}:#{rawDate.getSeconds()}
+        span.posts-list-data-part at #{post.time.date}  #{post.time.time}
   .post-description
     p
-      if post.content.length > 255
-        | !{post.content.substr(0, 252)}...
+      if post.markedContent.length > 255
+        = post.markedContent.substr(0, 252).replace(/<(?:.|\n)*?>/gm, '') + '...'
       else
-        | !{post.content}
-
+        = post.markedContent.replace(/<(?:.|\n)*?>/gm, '')

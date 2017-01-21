@@ -45,7 +45,7 @@ exports.category = (req, res, next) => {
 }
 
 exports.insert = (req, res) => {
-  console.log(req.body.post)
+  // console.log(req.body.post)
   // return res.send('test')
   const postData = getPosts(1)
   const post = new Post(Object.assign({}, postData[0], req.body.post))

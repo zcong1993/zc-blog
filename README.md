@@ -1,6 +1,6 @@
 # zc-blog
 
-> A blog using express
+> A blog using express, mongoose and purecss
 
 ## Build Setup
 
@@ -12,4 +12,3 @@ $ npm run dev
 # serve
 $ npm start
 ```
-

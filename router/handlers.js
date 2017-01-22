@@ -5,7 +5,6 @@ const config = require('../config')
 
 const Post = schemas.Post
 
-
 exports.index = (req, res, next) => {
   const page = parseInt(req.params.id) || 1
   Post.getCount()
@@ -39,8 +38,9 @@ exports.post = (req, res, next) => {
 }
 
 exports.category = (req, res, next) => {
-  Post.findByCategory(req.params.category)
-    .then((posts) => res.json(posts))
+  const cate = req.params.category
+  Post.findByCategory(cate)
+    .then((posts) => res.render('category', {posts, cate}))
     .catch(() => next(new Error('no such category')))
 }
 

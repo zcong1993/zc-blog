@@ -42,25 +42,44 @@ const postSchema = new Schema({
   }
 })
 
+/**
+ * support get posts by pagination number
+ * @param  {Number} num number of the pagination
+ * @return {Array}     mongoose doc array of posts
+ */
 postSchema.statics.getPostsByPage = function (num) {
   return Promise.resolve(this.find().limit(config.postsPerPage).sort({updated: -1}).skip(config.postsPerPage * (num - 1)))
 }
 
+/**
+ * get post by _id
+ * @param  {ObjectId} id mongodb ObjectId
+ * @return {Array}    mongoose doc array of posts
+ */
 postSchema.statics.findById = function (id) {
   return Promise.resolve(this.find({_id: id}))
 }
 
+/**
+ * get posts by category
+ * @param  {String} cate category name
+ * @return {Array}      mongoose doc Array of posts
+ */
 postSchema.statics.findByCategory = function (cate) {
   return Promise.resolve(this.find({categories: {$elemMatch: {name: new RegExp(cate, 'i')}}}))
 }
 
+/**
+ * get all posts count
+ * @return {Number} sum of posts
+ */
 postSchema.statics.getCount = function () {
   return Promise.resolve(this.count({}))
 }
-
-// postSchema.post('find', function (result, next) {
-//   next(Array.from(result, post => post.test = 1))
-// })
+/**
+ * making marked tarns and format date when get posts
+ * @type {[type]}
+ */
 postSchema.post('init', function (doc) {
   doc.markedContent = markedWithHighlight(doc.content)
   const date = doc.updated

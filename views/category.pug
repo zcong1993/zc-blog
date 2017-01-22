@@ -1,0 +1,6 @@
+extends layout/layout.pug
+block content
+  .posts.new
+    h1.content-subhead category: #{cate}
+    each post in posts
+      include layout/post.pug

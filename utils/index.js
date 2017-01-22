@@ -1,4 +1,4 @@
-const marked = require('marked')
+const marked = require('zc-marked')
 const hljs = require('highlight.js')
 const config = require('../config')
 

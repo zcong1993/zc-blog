@@ -56,10 +56,17 @@ exports.insert = (req, res, next) => {
 }
 
 exports.postApi = (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
   const postData = req.body
-  console.log(postData)
+  if (req.body.key !== config.apiKey) {
+    res.json({
+      status: 0,
+      msg: 'api key is required for auth!'
+    })
+  }
   const post = new Post(Object.assign({}, defaultPost, postData))
-  console.log(post, defaultPost)
   post.save()
     .then(() => res.json({
       status: 1,

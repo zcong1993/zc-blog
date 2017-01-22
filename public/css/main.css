@@ -2,23 +2,20 @@ body {
   line-height: 1.6
 }
 
-html, button, input, select, textarea,
-.pure-g [class *= "pure-u"] {
+html, button, input, select, textarea, .pure-g [class *="pure-u"] {
   font-family: sans-serif;
   font-weight: 100;
   letter-spacing: 0.01em;
   line-height: 1.6;
 }
 
-a:not(.post-category):not(.origin):hover,
-a:not(.post-category):not(.origin):focus {
+a:not(.post-category):not(.origin):hover, a:not(.post-category):not(.origin):focus {
   color: #00AA90;
   background: transparent;
   text-decoration: none
 }
 
-a.post-category:hover,
-a.post-category:focus {
+a.post-category:hover, a.post-category:focus {
   text-decoration: underline;
 }
 
@@ -53,11 +50,11 @@ a.post-category:focus {
 }
 
 .post-content {
-  /* border: 1px solid red; */
   line-height: 1.8;
   max-width: 48em;
   font-weight: 200;
   background-color: #eee;
+  padding: 1em;
 }
 
 .post-content blockquote {

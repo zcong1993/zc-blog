@@ -1,4 +1,5 @@
-const getPosts = require('../utils/mock').getPosts
+const {getPosts} = require('../utils/mock')
+const {defaultPost} = require('../utils')
 const schemas= require('../schemas/index')
 const mongoose = require('mongoose')
 const config = require('../config')
@@ -44,14 +45,30 @@ exports.category = (req, res, next) => {
     .catch(() => next(new Error('no such category')))
 }
 
-exports.insert = (req, res) => {
+exports.insert = (req, res, next) => {
   // console.log(req.body.post)
   // return res.send('test')
   const postData = getPosts(1)
   const post = new Post(Object.assign({}, postData[0], req.body.post))
   post.save()
-    .then(() => res.send('success'))
-    .catch((err) => res.send(err))
+    .then(() => res.redirect('/'))
+    .catch((err) => next(err))
+}
+
+exports.postApi = (req, res) => {
+  const postData = req.body
+  console.log(postData)
+  const post = new Post(Object.assign({}, defaultPost, postData))
+  console.log(post, defaultPost)
+  post.save()
+    .then(() => res.json({
+      status: 1,
+      msg: 'post published success!'
+    }))
+    .catch((err) => res.json({
+      status: 0,
+      msg: err
+    }))
 }
 
 exports.input = (req, res) => {
@@ -80,7 +97,10 @@ exports.notFoundHandler = (req, res, next) => {
   }
 
   if (req.accepts('json')) {
-    res.send({error: 'Not Found'})
+    res.send({
+      status: 0,
+      msg: 'Not Found'
+    })
     return
   }
 

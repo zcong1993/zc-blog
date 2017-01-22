@@ -3,12 +3,12 @@ const postSampleData = {
   author: 'Tilo Mitra',
   categories: [
     {
-      type: 'design',
+      type: 'css',
       name: 'CSS'
     },
     {
-      type: 'pure',
-      name: 'Pure'
+      type: 'php',
+      name: 'PHP'
     },
     {
       type: 'js',

@@ -8,12 +8,12 @@ const ObjectId = Schema.ObjectId
 const categoriesSchema = new Schema({
   type: {
     type: String,
-    require: [true, 'category type is required!'],
-    enum: ['design', 'pure', 'yui', 'js']
+    required: [true, 'category type is required!'],
+    enum: ['default', 'node', 'js', 'php', 'css']
   },
   name: {
     type: String,
-    require: [true, 'category name is required!']
+    required: [true, 'category name is required!']
   }
 })
 
@@ -21,7 +21,7 @@ const postSchema = new Schema({
   title: {
     type: String,
     // unique: true,
-    require: [true, 'title is required!'],
+    required: [true, 'title is required!'],
     validate: {
       validator: (v) => v.length < 50,
       message: '{VALUE} is too long!'
@@ -29,12 +29,12 @@ const postSchema = new Schema({
   },
   author: {
     type: String,
-    require: [true, 'author is required!']
+    required: [true, 'author is required!']
   },
   categories: [categoriesSchema],
   content: {
     type: String,
-    require: [true, 'content is required!']
+    required: [true, 'content is required!']
   },
   updated: {
     type: Date,
@@ -66,7 +66,7 @@ postSchema.statics.findById = function (id) {
  * @return {Array}      mongoose doc Array of posts
  */
 postSchema.statics.findByCategory = function (cate) {
-  return Promise.resolve(this.find({categories: {$elemMatch: {name: new RegExp(cate, 'i')}}}))
+  return Promise.resolve(this.find({categories: {$elemMatch: {name: new RegExp(cate, 'i')}}}).sort({updated: -1}))
 }
 
 /**

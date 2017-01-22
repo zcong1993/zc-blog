@@ -8,6 +8,7 @@ mongoose.connect('mongodb://localhost/zc-blog')
 
 const router = require('./router')
 const handlers = require('./router/handlers')
+const config = require('./config')
 
 app.use('/static', express.static('public'))
 app.use(bodyParser.json())
@@ -20,6 +21,7 @@ app.use(session({
 
 app.set('view engine', 'pug')
 app.locals.appName = 'zc-blog'
+app.locals.appConfig = config
 
 app.use(router)
 app.use(handlers.notFoundHandler)

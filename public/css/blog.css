@@ -116,16 +116,19 @@ h3 {
     background: #999;
     font-size: 80%;
 }
-    .post-category-design {
+    .post-category-node {
         background: #5aba59;
     }
-    .post-category-pure {
+    .post-category-php {
         background: #4d85d1;
     }
-    .post-category-yui {
+    .post-category-css {
         background: #8156a7;
     }
     .post-category-js {
+        background: #ffd390;
+    }
+    .post-category-default {
         background: #df2d4f;
     }
 

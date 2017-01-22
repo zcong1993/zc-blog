@@ -9,6 +9,7 @@ router.get('/test', handlers.insert)
 router.get('/show', handlers.show)
 router.get('/input', handlers.input)
 router.post('/insert', handlers.insert)
+router.post('/api', handlers.postApi)
 router.get('/post/:id', handlers.post)
 router.get('/category/:category', handlers.category)
 

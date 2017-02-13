@@ -84,8 +84,7 @@ postSchema.post('init', function (doc) {
   doc.markedContent = markedWithHighlight(doc.content)
   const date = doc.updated
   doc.time = {
-    date: `${date.getFullYear()}-
-    ${date.getMonth() + 1}-${date.getDate()}`,
+    date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
     time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
   }
 })

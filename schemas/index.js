@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const moment = require('moment-timezone')
 const config = require('../config')
 const {markedWithHighlight} = require('../utils')
 
@@ -38,7 +39,7 @@ const postSchema = new Schema({
   },
   updated: {
     type: Date,
-    default: Date.now
+    default: moment().tz('Asia/Shanghai').valueOf()
   }
 })
 

@@ -39,7 +39,7 @@ const postSchema = new Schema({
   },
   updated: {
     type: Date,
-    default: moment().tz('Asia/Shanghai').valueOf()
+    default: Date.now
   }
 })
 
@@ -61,6 +61,10 @@ postSchema.statics.findById = function (id) {
   return Promise.resolve(this.find({_id: id}))
 }
 
+postSchema.statics.deleteById = function (id) {
+  return Promise.resolve(this.remove({_id: id}))
+}
+
 /**
  * get posts by category
  * @param  {String} cate category name
@@ -78,7 +82,7 @@ postSchema.statics.getCount = function () {
   return Promise.resolve(this.count({}))
 }
 /**
- * making marked tarns and format date when get posts
+ * making marked trans and format date when get posts
  * @type {[type]}
  */
 postSchema.post('init', function (doc) {

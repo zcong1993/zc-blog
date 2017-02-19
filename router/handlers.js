@@ -29,6 +29,29 @@ exports.index = (req, res, next) => {
     .catch((err) => res.send(err))
 }
 
+exports.delete = (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+  if (req.body.key !== config.apiKey) {
+    return res.json({
+      status: 0,
+      msg: 'api key is required for auth!'
+    })
+  }
+  Post.deleteById(req.body.id)
+    .then(() => res.json({
+      status: 1,
+      msg: 'delete success!'
+    }))
+    .catch((err) => {
+      res.json({
+        status: 0,
+        msg: 'delete failed!'
+      })
+    })
+}
+
 exports.post = (req, res, next) => {
   Post.findById(req.params.id)
     .then((posts) => {
@@ -61,7 +84,7 @@ exports.postApi = (req, res) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type')
   const postData = req.body
   if (req.body.key !== config.apiKey) {
-    res.json({
+    return res.json({
       status: 0,
       msg: 'api key is required for auth!'
     })

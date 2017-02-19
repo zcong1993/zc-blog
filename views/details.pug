@@ -3,6 +3,6 @@ block content
   .container
     h1.text-center  #{post.title}
     h2.sub-title.text-center  author: #{post.author}&nbsp;&nbsp;
-      span updated: #{post.time.date} #{post.time.time}
+      span updated: #{post.time}
     .post-content.center
       | !{post.markedContent}

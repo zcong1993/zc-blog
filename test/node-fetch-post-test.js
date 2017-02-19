@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 const post = {
   key: 'rainbow',
   title: 'node fetch test',
-  content: fs.readFileSync('./invoke.md', 'utf8')
+  content: '`test`'
 }
 
 fetch('http://localhost:3000/api', {

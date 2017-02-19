@@ -11,7 +11,7 @@ section.post
       span.posts-list-data-part
         each category in post.categories
           +category-type(category.type, category.name)
-        span.posts-list-data-part at #{post.time.date}  #{post.time.time}
+        span.posts-list-data-part at #{post.time}
   .post-description
     p
       if post.markedContent.length > 255

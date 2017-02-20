@@ -2,7 +2,9 @@ extends layout/layout.pug
 block content
   .container
     h1.text-center  #{post.title}
-    h2.sub-title.text-center  author: #{post.author}&nbsp;&nbsp;
-      span updated: #{post.time}
+    h2.sub-title.text-center
+      i.fa.fa-user &nbsp;author: #{post.author}&nbsp;&nbsp;
+      span
+        i.fa.fa-cloud-upload &nbsp;updated: #{post.time}
     .post-content.center
       | !{post.markedContent}

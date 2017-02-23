@@ -136,3 +136,7 @@ exports.notFoundHandler = (req, res, next) => {
 
   res.type('txt').send('Not Found')
 }
+
+exports.aboutme = (req, res) => {
+  res.render('aboutme')
+}

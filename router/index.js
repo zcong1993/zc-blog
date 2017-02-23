@@ -13,5 +13,6 @@ router.post('/api', handlers.postApi)
 router.post('/delete', handlers.delete)
 router.get('/post/:id', handlers.post)
 router.get('/category/:category', handlers.category)
+router.get('/aboutme', handlers.aboutme)
 
 module.exports = router

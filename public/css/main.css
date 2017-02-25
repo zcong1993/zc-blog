@@ -20,7 +20,7 @@ a.post-category:hover, a.post-category:focus {
 }
 
 .pull-right {
-  float: right;
+  float: right!important;
 }
 
 .posts-list-data-part {
@@ -102,5 +102,59 @@ a.post-category:hover, a.post-category:focus {
   }
   .sub-title span {
     display: inline-block;
+  }
+}
+
+.about-main {
+  margin-top: 40px;
+}
+
+.about-item {
+  margin-top: 5px;
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #FFFFFB;
+  min-height: 80px;
+  border-radius: 10px;
+}
+
+.school {
+  max-width: 75px;
+  max-height: 75px;
+}
+
+.null {
+  display: inline-block;
+  width: 72px;
+}
+
+.about-tag {
+  display: inline-block;
+  background-color: #A5DEE4;
+  min-width: 64px;
+  text-align: center;
+  margin: 2px 4px;
+  border-radius: 5px;
+}
+
+.about-blockquote {
+  max-width: 35em;
+  font-weight: 190;
+  font-size: 1.125em;
+  padding: 0 6px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+@media (min-width: 48em) {
+  .link-group {
+    display: inline-block;
+  }
+  .link-group:nth-last-child(-n+2) {
+    margin-left: 6px;
   }
 }

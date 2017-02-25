@@ -12,25 +12,29 @@ a {
 .post-content h1 {
   color: #2674BA;
 }
+
 .post-content h2 {
   color: #0099CC;
 }
+
 .post-content h3 {
   color: #F77A0B;
 }
+
 .post-content h4 {
   color: #662D91;
 }
+
 .post-content h5 {
   color: #444444;
 }
 
 .post-content code {
-    padding: 2px 4px;
-    font-size: 90%;
-    color: #c7254e;
-    background-color: #f9f2f4;
-    border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
 }
 
 .post-content .hljs code {
@@ -40,6 +44,7 @@ a {
   background-color: inherit;
   border-radius: 0;
 }
+
 
 /* LAYOUT CSS */
 
@@ -134,7 +139,6 @@ a {
 }
 
 .post-description {
-  font-family: Georgia, "Cambria", serif;
   color: #777;
   line-height: 1.8em;
 }

@@ -3,6 +3,7 @@ const {defaultPost} = require('../utils')
 const schemas= require('../schemas/index')
 const mongoose = require('mongoose')
 const config = require('../config')
+const cache = require('../utils/cache')
 
 const Post = schemas.Post
 
@@ -40,10 +41,13 @@ exports.delete = (req, res) => {
     })
   }
   Post.deleteById(req.body.id)
-    .then(() => res.json({
-      status: 1,
-      msg: 'delete success!'
-    }))
+    .then(() => {
+      cache.del(req.body.id)
+      return res.json({
+        status: 1,
+        msg: 'delete success!'
+      })
+    })
     .catch((err) => {
       res.json({
         status: 0,
@@ -53,10 +57,17 @@ exports.delete = (req, res) => {
 }
 
 exports.post = (req, res, next) => {
-  Post.findById(req.params.id)
+  const id = req.params.id
+  if (cache.has(id)) {
+    console.log('cached  ' + id)
+    const post = cache.get(id)
+    return res.render('details', { post })
+  }
+  Post.findById(id)
     .then((posts) => {
       const post = posts[0]
-      res.render('details', {post})
+      cache.set(id, post)
+      res.render('details', { post })
     })
     .catch(() => next(new Error('no post here')))
 }

@@ -1,19 +1,19 @@
-const {getPosts} = require('../utils/mock')
-const {defaultPost} = require('../utils')
-const schemas= require('../schemas/index')
-const mongoose = require('mongoose')
+const { getPosts } = require('../utils/mock')
+const { defaultPost } = require('../utils')
+const schemas = require('../schemas/index')
+// const mongoose = require('mongoose')
 const config = require('../config')
 const cache = require('../utils/cache')
 
 const Post = schemas.Post
 
 exports.index = (req, res, next) => {
-  const page = parseInt(req.params.id) || 1
+  const page = parseInt(req.params.id, 10) || 1
   Post.getCount()
     .then(num => {
-        Post.getPostsByPage(page)
-        .then((posts) => {
-          if (posts.length) {
+      Post.getPostsByPage(page)
+        .then(posts => {
+          if (posts.length > 0) {
             num = Math.ceil(num / config.postsPerPage)
             const opts = {
               isFirst: page === 1,
@@ -21,13 +21,13 @@ exports.index = (req, res, next) => {
               pastUrl: `/home/${page + 1}`,
               newUrl: `/home/${page - 1}`
             }
-            res.render('index', {posts, page, opts})
+            res.render('index', { posts, page, opts })
           } else {
             next(new Error('no posts here!'))
           }
         })
     })
-    .catch((err) => res.send(err))
+    .catch(err => res.send(err))
 }
 
 exports.delete = (req, res) => {
@@ -48,7 +48,7 @@ exports.delete = (req, res) => {
         msg: 'delete success!'
       })
     })
-    .catch((err) => {
+    .catch(() => {
       res.json({
         status: 0,
         msg: 'delete failed!'
@@ -64,7 +64,7 @@ exports.post = (req, res, next) => {
     return res.render('details', { post })
   }
   Post.findById(id)
-    .then((posts) => {
+    .then(posts => {
       const post = posts[0]
       cache.set(id, post)
       res.render('details', { post })
@@ -75,7 +75,7 @@ exports.post = (req, res, next) => {
 exports.category = (req, res, next) => {
   const cate = req.params.category
   Post.findByCategory(cate)
-    .then((posts) => res.render('category', {posts, cate}))
+    .then(posts => res.render('category', { posts, cate }))
     .catch(() => next(new Error('no such category')))
 }
 
@@ -86,7 +86,7 @@ exports.insert = (req, res, next) => {
   const post = new Post(Object.assign({}, postData[0], req.body.post))
   post.save()
     .then(() => res.redirect('/'))
-    .catch((err) => next(err))
+    .catch(err => next(err))
 }
 
 exports.postApi = (req, res) => {
@@ -106,7 +106,7 @@ exports.postApi = (req, res) => {
       status: 1,
       msg: 'post published success!'
     }))
-    .catch((err) => res.json({
+    .catch(err => res.json({
       status: 0,
       msg: err
     }))
@@ -122,18 +122,18 @@ exports.show = (req, res, next) => {
     .then(() => next(new Error('test')))
 }
 
-exports.errorHandler = (err, req, res, next) => {
+exports.errorHandler = (err, req, res) => {
   if (err) {
     res.status(500)
-    res.send({error: err.message})
+    res.send({ error: err.message })
   }
 }
 
-exports.notFoundHandler = (req, res, next) => {
+exports.notFoundHandler = (req, res) => {
   res.status(404)
 
   if (req.accepts('html')) {
-    res.render('404', {url: req.url})
+    res.render('404', { url: req.url })
     return
   }
 

@@ -1,7 +1,7 @@
 const express = require('express')
 const handlers = require('./handlers')
 
-const router = express.Router()
+const router = new express.Router()
 
 router.get('/', handlers.index)
 router.get('/home/:id?', handlers.index)

@@ -1,18 +1,19 @@
 const express = require('express')
-const app = express()
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost/zc-blog')
 
 const router = require('./router')
 const handlers = require('./router/handlers')
 const config = require('./config')
 
+const app = express()
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost/zc-blog')
+
 app.use('/static', express.static('public'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({
   secret: 'zc-blog',
   resave: false,

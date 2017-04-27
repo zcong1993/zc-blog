@@ -6,7 +6,10 @@
   "private": true,
   "scripts": {
     "dev": "supervisor  index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "xo",
+    "lint:fix": "xo --fix",
+    "test": "npm run xo"
   },
   "engines": {
     "node": ">= 4.0.0",
@@ -22,10 +25,16 @@
   },
   "devDependencies": {
     "body-parser": "^1.15.2",
+    "eslint-config-rem": "^3.0.1",
     "express-session": "^1.14.2",
     "mongoose": "^4.7.5",
     "node-fetch": "^1.6.3",
     "pug": "^2.0.0-beta6",
-    "supervisor": "^0.12.0"
+    "supervisor": "^0.12.0",
+    "xo": "^0.18.1"
+  },
+  "xo": {
+    "esnext": true,
+    "extends": "rem"
   }
 }

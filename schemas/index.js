@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 const moment = require('moment-timezone')
 const config = require('../config')
-const {markedWithHighlight} = require('../utils')
+const { markedWithHighlight } = require('../utils')
 
 const Schema = mongoose.Schema
-const ObjectId = Schema.ObjectId
+// const ObjectId = Schema.ObjectId
 
 const categoriesSchema = new Schema({
   type: {
@@ -24,7 +24,7 @@ const postSchema = new Schema({
     // unique: true,
     required: [true, 'title is required!'],
     validate: {
-      validator: (v) => v.length < 50,
+      validator: v => v.length < 50,
       message: '{VALUE} is too long!'
     }
   },
@@ -49,7 +49,7 @@ const postSchema = new Schema({
  * @return {Array}     mongoose doc array of posts
  */
 postSchema.statics.getPostsByPage = function (num) {
-  return Promise.resolve(this.find().limit(config.postsPerPage).sort({updated: -1}).skip(config.postsPerPage * (num - 1)))
+  return Promise.resolve(this.find().limit(config.postsPerPage).sort({ updated: -1 }).skip(config.postsPerPage * (num - 1)))
 }
 
 /**
@@ -58,11 +58,11 @@ postSchema.statics.getPostsByPage = function (num) {
  * @return {Array}    mongoose doc array of posts
  */
 postSchema.statics.findById = function (id) {
-  return Promise.resolve(this.find({_id: id}))
+  return Promise.resolve(this.find({ _id: id }))
 }
 
 postSchema.statics.deleteById = function (id) {
-  return Promise.resolve(this.remove({_id: id}))
+  return Promise.resolve(this.remove({ _id: id }))
 }
 
 /**
@@ -71,7 +71,7 @@ postSchema.statics.deleteById = function (id) {
  * @return {Array}      mongoose doc Array of posts
  */
 postSchema.statics.findByCategory = function (cate) {
-  return Promise.resolve(this.find({categories: {$elemMatch: {name: new RegExp(cate, 'i')}}}).sort({updated: -1}))
+  return Promise.resolve(this.find({ categories: { $elemMatch: { name: new RegExp(cate, 'i') } } }).sort({ updated: -1 }))
 }
 
 /**
@@ -85,7 +85,7 @@ postSchema.statics.getCount = function () {
  * making marked trans and format date when get posts
  * @type {[type]}
  */
-postSchema.post('init', function (doc) {
+postSchema.post('init', doc => {
   doc.markedContent = markedWithHighlight(doc.content)
   const date = doc.updated
   doc.time = moment(date).tz('Asia/Shanghai').format('YYYY-MM-DD HH:mm:ss')

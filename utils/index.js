@@ -4,7 +4,7 @@ const config = require('../config')
 
 marked.setOptions({
   highlightClass: 'hljs',
-  highlight: (code) => hljs.highlightAuto(code).value
+  highlight: code => hljs.highlightAuto(code).value
 })
 
 exports.markedWithHighlight = marked
